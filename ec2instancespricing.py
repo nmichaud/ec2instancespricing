@@ -344,23 +344,23 @@ if __name__ == "__main__":
 		x = PrettyTable()
 
 		if args.type == "ondemand":
-			x.set_field_names(["region", "type", "os", "price"])
-			x.aligns[-1] = "l"
+			x.field_names = ["region", "type", "os", "price"]
+			x.align[-1] = "l"
 			for r in data["regions"]:
 				region_name = r["region"]
 				for it in r["instanceTypes"]:
 					x.add_row([region_name, it["type"], it["os"], none_as_string(it["price"])])
 		elif args.type == "reserved":
-			x.set_field_names(["region", "type", "os", "utilization", "term", "price", "upfront"])
-			x.aligns[-1] = "l"
-			x.aligns[-2] = "l"
+			x.field_names = ["region", "type", "os", "utilization", "term", "price", "upfront"]
+			x.align[-1] = "l"
+			x.align[-2] = "l"
 			for r in data["regions"]:
 				region_name = r["region"]
 				for it in r["instanceTypes"]:
 					for term in it["prices"]:
 						x.add_row([region_name, it["type"], it["os"], it["utilization"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"])])
 
-		x.printt()
+		print(x)
 	elif args.format == "csv":
 		if args.type == "ondemand":
 			print "region,type,os,price"
